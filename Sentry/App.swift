@@ -13,7 +13,6 @@ struct App: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .colorScheme(.dark)
         }
         .commandsRemoved()
         .windowStyle(.hiddenTitleBar)

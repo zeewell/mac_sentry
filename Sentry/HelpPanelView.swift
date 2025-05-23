@@ -28,7 +28,5 @@ struct HelpPanelView: View {
         }
         .frame(width: 400)
         .padding(10)
-        .background(.black.opacity(0.75))
-        .colorScheme(.dark)
     }
 }

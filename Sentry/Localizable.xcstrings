@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "**Sentry Mode** is a feature that detects and responds to potential theft or unauthorized access when you leave your Mac." : {
 
     },
@@ -20,6 +17,9 @@
 
     },
     "Available triggers include:" : {
+
+    },
+    "Close" : {
 
     },
     "Failed to create display assertion. Please check your system settings." : {
@@ -47,6 +47,9 @@
 
     },
     "Sentry Mode will not prevent your Mac from being stolen or damaged, but it can help you locate your Mac or identify the troublemaker." : {
+
+    },
+    "Sentry Notification" : {
 
     },
     "Setup Alarms" : {

@@ -55,8 +55,11 @@ struct ContentView: View {
                 isFirstVisit = false
             }
         }
-        .background(.background)
     }
+
+    @State var openSetupAlarm: Bool = false
+    @State var openSetupNotifications: Bool = false
+    @State var openSetupRecordings: Bool = false
 
     @ViewBuilder
     var options: some View {
@@ -65,16 +68,28 @@ struct ContentView: View {
             text: "Setup Alarms",
             isActivated: false
         )
+        .onTapGesture { openSetupAlarm = true }
+        .sheet(isPresented: $openSetupAlarm) {
+            SetupAlarmsView()
+        }
         SentryOption(
             icon: "app.badge",
             text: "Setup Notifications",
             isActivated: false
         )
+        .onTapGesture { openSetupNotifications = true }
+        .sheet(isPresented: $openSetupNotifications) {
+            SetupNotificationsView()
+        }
         SentryOption(
             icon: "camera",
             text: "Setup Recordings",
             isActivated: false
         )
+        .onTapGesture { openSetupRecordings = true }
+        .sheet(isPresented: $openSetupRecordings) {
+            SetupRecordingsView()
+        }
     }
 }
 
@@ -92,7 +107,7 @@ struct SentryOption: View {
         .frame(maxWidth: .infinity)
         .padding(12)
         .padding(.horizontal, 8)
-        .background(Color.accent.opacity(0.1))
+        .background(Color.gray.opacity(0.1))
         .contentShape(Rectangle())
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
@@ -100,6 +115,4 @@ struct SentryOption: View {
 
 #Preview {
     ContentView()
-        .background(.black)
-        .colorScheme(.dark)
 }

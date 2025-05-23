@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SentryView: View {
-    
     var body: some View {
         ZStack {
             Spacer()

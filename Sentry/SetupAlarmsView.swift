@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SetupAlarmsView: View {
     var body: some View {
-        Text("")
+        FormView(title: "Setup Alarms") {
+            Text("Setup Alarms")
+        }
     }
 }

@@ -14,34 +14,38 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
     private var sleepAssertionID: IOPMAssertionID = 0
     private var displayAssertionID: IOPMAssertionID = 0
-    
+
     override init() {
         super.init()
+        print("[*] AppDelegate initialized")
     }
 
     func applicationDidFinishLaunching(_: Notification) {
+        _ = SentryConfiguration.shared
         _ = MouseLocation.shared
         preventSleep()
         preventDisplaySleep()
         if let isClamshellClosed = DeviceCheck.isMacLidClosed() {
-            print("[*] clamshell closed: \(isClamshellClosed)")
+            print("[*] device check reporting clamshell closed: \(isClamshellClosed)")
         } else {
             print("[*] failed to get clamshell state")
             presentError(title: "Sentry", message: "Failed to get clamshell state. Please check your system settings.")
         }
         if let isLocked = DeviceCheck.isMacLocked() {
-            print("[*] screen locked: \(isLocked)")
+            print("[*] device check reporting screen locked: \(isLocked)")
         } else {
             print("[*] failed to get screen lock state")
             presentError(title: "Sentry", message: "Failed to get screen lock state. Please check your system settings.")
         }
+        let wifi = DeviceCheck.isConnectedToWirelessNetwork()
+        print("[*] device check reporting wifi connected: \(wifi)")
     }
-    
-    func applicationWillTerminate(_ notification: Notification) {
+
+    func applicationWillTerminate(_: Notification) {
         allowSleep()
         allowDisplaySleep()
     }
-    
+
     private func preventSleep() {
         let reason = "Sentry app is monitoring system" as CFString
         let result = IOPMAssertionCreateWithName(
@@ -50,20 +54,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             reason,
             &sleepAssertionID
         )
-        
+
         if result != kIOReturnSuccess {
             print("[*] failed to create sleep assertion: \(result)")
             presentError(title: "Sentry", message: "Failed to create sleep assertion. Please check your system settings.")
         }
     }
-    
+
     private func allowSleep() {
         if sleepAssertionID != 0 {
             IOPMAssertionRelease(sleepAssertionID)
             sleepAssertionID = 0
         }
     }
-    
+
     private func preventDisplaySleep() {
         let reason = "Sentry app is monitoring display" as CFString
         let result = IOPMAssertionCreateWithName(
@@ -72,20 +76,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             reason,
             &displayAssertionID
         )
-        
+
         if result != kIOReturnSuccess {
             print("[*] failed to create display assertion: \(result)")
             presentError(title: "Sentry", message: "Failed to create display assertion. Please check your system settings.")
         }
     }
-    
+
     private func allowDisplaySleep() {
         if displayAssertionID != 0 {
             IOPMAssertionRelease(displayAssertionID)
             displayAssertionID = 0
         }
     }
-    
+
     private func presentError(title: String.LocalizationValue, message: String.LocalizationValue) {
         let alert = NSAlert()
         alert.messageText = String(localized: title)
@@ -94,5 +98,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         alert.addButton(withTitle: String(localized: "OK"))
         alert.runModal()
     }
-
 }

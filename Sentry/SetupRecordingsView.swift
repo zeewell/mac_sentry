@@ -9,6 +9,6 @@ import SwiftUI
 
 struct SetupRecordingsView: View {
     var body: some View {
-        Text("")
+        FormView(title: "Setup Recordings") {}
     }
 }
