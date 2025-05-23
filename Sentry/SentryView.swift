@@ -34,7 +34,7 @@ struct SentryView: View {
 
     var texts: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(Date(), style: .time)
+            Image(systemName: "eye.fill")
                 .bold()
                 .font(.largeTitle)
                 .opacity(0.2)

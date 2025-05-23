@@ -7,12 +7,13 @@
 
 import AppKit
 import AVFAudio
+import AVFoundation
 import AVKit
 import Foundation
 import SkyLightWindow
 import SwiftUI
 
-class Sentry {
+class Sentry: NSObject {
     // MARK: - Configuration & Callbacks
 
     let configuration: SentryConfiguration
@@ -41,11 +42,19 @@ class Sentry {
     private var audioPlayer: AVAudioPlayer?
     private var volumeTimer: Timer?
 
+    // MARK: - Recording System
+
+    private var captureSession: AVCaptureSession?
+    private var videoFileOutput: AVCaptureMovieFileOutput?
+    private var currentRecordingURL: URL?
+    private var recordingStartTime: Date?
+
     // MARK: - Initialization
 
     init(configuration: SentryConfiguration, onAlarmingActivaty: @escaping (_ reason: String) -> Void) {
         self.configuration = configuration
         self.onAlarmingActivaty = onAlarmingActivaty
+        super.init()
     }
 
     // MARK: - Public Methods
@@ -73,6 +82,7 @@ class Sentry {
     func stop() {
         guard status == .run else { return }
         status = .tearingDown
+        stopRecording()
         unlockAlarm()
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.3
@@ -98,6 +108,7 @@ class Sentry {
         lastPowerState = nil
         isCurrentlyAlarming = false
         stopAlarm()
+        stopRecording()
     }
 
     // MARK: - Private Methods - Monitoring
@@ -187,7 +198,7 @@ class Sentry {
 
     private func playAlarmSound() {
         guard let soundURL = Bundle.main.url(forResource: "alarm", withExtension: "mp3") else {
-            print("找不到 alarm.mp3 文件")
+            assertionFailure()
             return
         }
 
@@ -197,10 +208,9 @@ class Sentry {
             audioPlayer?.volume = 0.1 // 开始时 10% 音量
             audioPlayer?.play()
 
-            // 启动音量渐增定时器
             startVolumeTimer()
         } catch {
-            print("播放音频失败: \(error)")
+            print("[-] failed to play alarm sound: \(error)")
         }
     }
 
@@ -215,11 +225,11 @@ class Sentry {
 
             currentStep += 1
             if currentStep <= 3 {
-                // 前3秒保持 10% 音量
+                // 前 3 秒保持 10% 音量
                 return
             }
 
-            // 从第4秒开始每秒递增 20%
+            // 从第 4 秒开始每秒递增 20%
             let newVolume = min(1.0, 0.1 + Float(currentStep - 3) * 0.2)
             audioPlayer?.volume = newVolume
 
@@ -255,11 +265,11 @@ class Sentry {
             .init(name: "call", value: "1"),
         ]
         let url = comps.url
-        guard let url = url else { return }
+        guard let url else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
+        URLSession.shared.dataTask(with: request) { _, _, error in
+            if let error {
                 print("[*] bark push error: \(error)")
             }
         }.resume()
@@ -269,7 +279,91 @@ class Sentry {
 
     private func startRecording() {
         print("[*] start recording camera...")
-        
-        
+
+        guard captureSession == nil else { return }
+        guard AVCaptureDevice.authorizationStatus(for: .video) == .authorized else {
+            print("[*] camera permission not granted")
+            return
+        }
+        captureSession = AVCaptureSession()
+        guard let captureSession else { return }
+
+        captureSession.beginConfiguration()
+
+        if captureSession.canSetSessionPreset(.medium) {
+            captureSession.sessionPreset = .medium
+        }
+        guard let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
+              let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice),
+              captureSession.canAddInput(videoDeviceInput)
+        else {
+            print("[*] failed to add video input")
+            captureSession.commitConfiguration()
+            self.captureSession = nil
+            return
+        }
+
+        captureSession.addInput(videoDeviceInput)
+        videoFileOutput = AVCaptureMovieFileOutput()
+        guard let videoFileOutput,
+              captureSession.canAddOutput(videoFileOutput)
+        else {
+            print("[*] failed to add video output")
+            captureSession.commitConfiguration()
+            self.captureSession = nil
+            return
+        }
+
+        captureSession.addOutput(videoFileOutput)
+        captureSession.commitConfiguration()
+
+        recordingStartTime = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+        let fileName = "Sentry_\(formatter.string(from: recordingStartTime!)).mov"
+        currentRecordingURL = videoClipDir.appendingPathComponent(fileName)
+
+        try? FileManager.default.createDirectory(
+            at: videoClipDir,
+            withIntermediateDirectories: true,
+            attributes: nil
+        )
+        DispatchQueue.global(qos: .background).async {
+            captureSession.startRunning()
+
+            if let outputURL = self.currentRecordingURL {
+                videoFileOutput.startRecording(to: outputURL, recordingDelegate: self)
+                print("[*] recording started to: \(outputURL.path)")
+            }
+        }
+    }
+
+    private func stopRecording() {
+        guard let captureSession else { return }
+
+        print("[*] stop recording camera...")
+
+        videoFileOutput?.stopRecording()
+
+        DispatchQueue.global(qos: .background).async {
+            captureSession.stopRunning()
+        }
+
+        self.captureSession = nil
+        videoFileOutput = nil
+        currentRecordingURL = nil
+        recordingStartTime = nil
+    }
+}
+
+// MARK: - AVCaptureFileOutputRecordingDelegate
+
+extension Sentry: AVCaptureFileOutputRecordingDelegate {
+    func fileOutput(_: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from _: [AVCaptureConnection], error: Error?) {
+        if let error {
+            print("[*] recording finished with error: \(error)")
+        } else {
+            print("[*] recording finished successfully: \(outputFileURL.path)")
+        }
     }
 }
