@@ -54,8 +54,22 @@ struct ContentView: View {
                 Divider()
                 Text(hint)
                 Divider()
-                Button("Exit") {
-                    exit(0)
+                HStack {
+                    if sentry?.configuration.sentryRecordingEnabled ?? false {
+                        Button("Open Saved Clips") {
+                            try? FileManager.default.createDirectory(
+                                atPath: videoClipDir.path,
+                                withIntermediateDirectories: true
+                            )
+                            NSWorkspace.shared.selectFile(
+                                nil,
+                                inFileViewerRootedAtPath: videoClipDir.path
+                            )
+                        }
+                    }
+                    Button("Exit") {
+                        exit(0)
+                    }
                 }
             }
             .padding(64)
