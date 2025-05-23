@@ -28,7 +28,7 @@ struct WelcomePanel: View {
         case .setupNow:
             String(localized: "Setup with Options Below")
         case .lockToContinue:
-            String(localized: "Lock Your Mac to Activate")
+            String(localized: "Lock Your Mac to Activate Sentry Mode")
         }
     }
 

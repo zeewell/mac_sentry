@@ -28,13 +28,13 @@ class AppDelegate: NSObject, ObservableObject, NSApplicationDelegate {
             print("[*] device check reporting clamshell closed: \(isClamshellClosed)")
         } else {
             print("[*] failed to get clamshell state")
-            presentError(title: "Sentry", message: "Failed to get clamshell state. Please check your system settings.")
+            presentError(title: "Sentry", message: "Unable to configure Sentry. Please try again later.")
         }
         if let isLocked = DeviceCheck.isMacLocked() {
             print("[*] device check reporting screen locked: \(isLocked)")
         } else {
             print("[*] failed to get screen lock state")
-            presentError(title: "Sentry", message: "Failed to get screen lock state. Please check your system settings.")
+            presentError(title: "Sentry", message: "Unable to configure Sentry. Please try again later.")
         }
         let wifi = DeviceCheck.isConnectedToWirelessNetwork()
         print("[*] device check reporting wifi connected: \(wifi)")
@@ -44,7 +44,7 @@ class AppDelegate: NSObject, ObservableObject, NSApplicationDelegate {
             print("[*] device check reporting battery level: \(battery)")
         } else {
             print("[*] failed to get battery level")
-            presentError(title: "Sentry", message: "Failed to get battery level. Please check your system settings.")
+            presentError(title: "Sentry", message: "Unable to configure Sentry. Please try again later.")
         }
     }
 
@@ -64,7 +64,7 @@ class AppDelegate: NSObject, ObservableObject, NSApplicationDelegate {
 
         if result != kIOReturnSuccess {
             print("[*] failed to create sleep assertion: \(result)")
-            presentError(title: "Sentry", message: "Failed to create sleep assertion. Please check your system settings.")
+            presentError(title: "Sentry", message: "Unable to configure Sentry. Please try again later.")
         }
     }
 
@@ -86,7 +86,7 @@ class AppDelegate: NSObject, ObservableObject, NSApplicationDelegate {
 
         if result != kIOReturnSuccess {
             print("[*] failed to create display assertion: \(result)")
-            presentError(title: "Sentry", message: "Failed to create display assertion. Please check your system settings.")
+            presentError(title: "Sentry", message: "Unable to configure Sentry. Please try again later.")
         }
     }
 

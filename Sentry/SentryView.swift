@@ -33,10 +33,12 @@ struct SentryView: View {
             ZStack {
                 if sentry.isAlrming {
                     ColorfulView(color: .sunset, noise: .constant(64))
+                        .transition(.opacity)
                         .ignoresSafeArea()
                 }
             }
         )
+        .animation(.interactiveSpring(), value: sentry.isAlrming)
         .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 32))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -67,7 +69,7 @@ struct SentryView: View {
                 .frame(width: 10, height: 888)
             if showEye {
                 EyeView()
-                    .contentTransition(.opacity)
+                    .transition(.opacity)
             }
         }
         .animation(.spring(duration: 2), value: showEye)

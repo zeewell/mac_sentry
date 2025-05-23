@@ -1,6 +1,24 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sentry"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "哨兵"
+          }
+        }
+      }
+    },
     "CFBundleName" : {
       "comment" : "Bundle name",
       "extractionState" : "extracted_with_value",
@@ -9,6 +27,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Sentry"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "哨兵"
           }
         }
       }
@@ -22,6 +46,12 @@
             "state" : "new",
             "value" : "Sentry Mode app needs this permission to record the space in front of your Mac. Your data will be stored locally."
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "哨兵模式需要这个权限才能录制电脑前的内容。录制内容将被保存到本地。"
+          }
         }
       }
     },
@@ -32,7 +62,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : ""
+            "value" : "Copyright © 2025 Lakr Aream. All rights reserved."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2025 砍砍@标准件厂长 版权所有"
           }
         }
       }

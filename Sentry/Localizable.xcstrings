@@ -2,25 +2,74 @@
   "sourceLanguage" : "en",
   "strings" : {
     "**Sentry Mode** is a feature that detects and responds to potential theft or unauthorized access when you leave your Mac." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**哨兵模式** 是一个能够在 Mac 锁定时检测电脑状态并阻止潜在危险的功能。"
+          }
+        }
+      }
     },
     "1. Closing your Mac's lid." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. 盒上 Mac 的盖子时"
+          }
+        }
+      }
     },
     "2. Disconnecting from the internet." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. 断开与互联网的连接时"
+          }
+        }
+      }
     },
     "3. Disconnecting the power adapter." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. 从电源适配器断开连接时"
+          }
+        }
+      }
     },
     "Activity Detected" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "监测到活动"
+          }
+        }
+      }
     },
     "Additionally, you can set up **Camera Recording**. When using camera recordings, please respect others' privacy." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "额外的，你可以设置 **摄像** 来保存视频。使用此功能时请注意保护他人的隐私。"
+          }
+        }
+      }
     },
     "Alarm triggers are used to fire the alarm when certain conditions are met." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "警告触发器，顾名思义，当条件被满足时会触发警报。"
+          }
+        }
+      }
     },
     "An alarm was triggered at: %@. Reason: %@" : {
       "localizations" : {
@@ -29,128 +78,374 @@
             "state" : "new",
             "value" : "An alarm was triggered at: %1$@. Reason: %2$@"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 %1$@ 时触发了一个警告，消息为：%2$@"
+          }
         }
       }
     },
     "Available triggers include:" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可用的触发器包括："
+          }
+        }
+      }
     },
     "Camera Access Denied" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法访问相机"
+          }
+        }
+      }
     },
     "Close" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关闭"
+          }
+        }
+      }
     },
     "Closing Lid" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "盒上盖子"
+          }
+        }
+      }
     },
     "Disconnected from Internet" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从互联网断开连接"
+          }
+        }
+      }
     },
     "Disconnected from Power Adapter" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从电源适配器断开连接"
+          }
+        }
+      }
     },
     "Enable Camera Recording" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用摄像"
+          }
+        }
+      }
     },
     "Endpoint" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "端点"
+          }
+        }
+      }
     },
     "Exit" : {
-
-    },
-    "Failed to create display assertion. Please check your system settings." : {
-
-    },
-    "Failed to create sleep assertion. Please check your system settings." : {
-
-    },
-    "Failed to get battery level. Please check your system settings." : {
-
-    },
-    "Failed to get clamshell state. Please check your system settings." : {
-
-    },
-    "Failed to get screen lock state. Please check your system settings." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出"
+          }
+        }
+      }
     },
     "If you have Bark installed on your phone, connect to Bark here. For more information, please visit [https://bark.day.app/](https://bark.day.app/)." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果你已在手机上安装 Bark，可以在这里填入 Bark 推送的地址。请访问 [https://bark.day.app/](https://bark.day.app/) 来获取更多信息。"
+          }
+        }
+      }
     },
     "Location based detection is not available, you should setup **Find My Mac** instead." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "基于位置的服务并不可用，因为你应该使用 **查找我的 Mac**。"
+          }
+        }
+      }
     },
-    "Lock Your Mac to Activate" : {
-
+    "Lock Your Mac to Activate Sentry Mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "锁定你的 Mac 来激活哨兵模式"
+          }
+        }
+      }
     },
     "Mac Lid Closed" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关上 Mac 的盖子"
+          }
+        }
+      }
     },
     "Network Disconnected" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "网络已断开"
+          }
+        }
+      }
     },
     "OK" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确定"
+          }
+        }
+      }
     },
     "Once set up, Sentry Mode will **automatically activate** when you **lock** your device." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当设置完毕后，哨兵模式会在 **锁定** 时 **自动启动**。"
+          }
+        }
+      }
     },
     "Open Saved Clips" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开录制文件夹"
+          }
+        }
+      }
     },
     "Play Sound" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "播放声音"
+          }
+        }
+      }
     },
     "Please remember to respect the privacy of others." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请注意尊重他人隐私。"
+          }
+        }
+      }
     },
     "Power Disconnected" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "电源已断开"
+          }
+        }
+      }
     },
     "Requesting Camera Access..." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请求访问相机中…"
+          }
+        }
+      }
     },
     "Sentry" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "哨兵"
+          }
+        }
+      }
     },
     "Sentry Mode" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "哨兵模式"
+          }
+        }
+      }
     },
     "Sentry Mode - Mac" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "哨兵模式 - Mac"
+          }
+        }
+      }
     },
     "Sentry Mode Completed" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "哨兵模式结束"
+          }
+        }
+      }
     },
     "Sentry Mode will not prevent your Mac from being stolen or damaged, but it can help you locate your Mac or identify the troublemaker." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "哨兵模式不能阻止你的 Mac 被偷窃或者损坏，但能一定程度减少这些事情发生的可能性，并帮助你确认是谁闯了祸。"
+          }
+        }
+      }
     },
     "Server Endpoint" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器端点"
+          }
+        }
+      }
     },
     "Setup Alarm Triggers" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置警报触发器"
+          }
+        }
+      }
     },
     "Setup Alarms" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置警报"
+          }
+        }
+      }
     },
     "Setup Notifications" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置通知"
+          }
+        }
+      }
     },
     "Setup Recordings" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置录制"
+          }
+        }
+      }
     },
     "Setup with Options Below" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请在下面的内容中配置"
+          }
+        }
+      }
     },
     "The easiest way to warn the troublemaker is to play sound. It is recommended to enable." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "想要警告闯祸的人，用最大音量播放一段声音是最简单的办法。我们推荐你打开这个选项。"
+          }
+        }
+      }
     },
     "This Mac is connected to the internet and is monitoring your behavior." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此 Mac 已联网，并正在监视你的行为。"
+          }
+        }
+      }
+    },
+    "Unable to configure Sentry. Please try again later." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法配置哨兵，请稍后再试。"
+          }
+        }
+      }
     },
     "Use Bark" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用 Bark"
+          }
+        }
+      }
     },
     "Version %@ (%@)" : {
       "localizations" : {
@@ -159,17 +454,44 @@
             "state" : "new",
             "value" : "Version %1$@ (%2$@)"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "版本 %1$@ (%2$@)"
+          }
         }
       }
     },
     "Welcome to Sentry Mode" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "欢迎来到哨兵模式"
+          }
+        }
+      }
     },
     "When a selected trigger occurs, Sentry Mode will either play a sound or send you a notification." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当选中的触发器被触发时，哨兵模式会播放声音或者向你发送通知。"
+          }
+        }
+      }
     },
     "You can enable camera recording when Sentry Mode is activated." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你可以在开启哨兵模式时启用录制。"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
