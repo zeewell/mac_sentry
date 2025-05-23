@@ -7,6 +7,9 @@
 
 import CoreGraphics
 import Foundation
+import IOKit
+import IOKit.ps
+import IOKit.pwr_mgt
 import SystemConfiguration
 
 enum DeviceCheck {
@@ -61,5 +64,54 @@ enum DeviceCheck {
         }
 
         return flags.contains(.reachable) && !flags.contains(.connectionRequired)
+    }
+
+    static func isConnectedToPower() -> Bool {
+        if IOPSCopyExternalPowerAdapterDetails() != nil {
+            return true
+        }
+
+        guard let powerInfo = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(),
+              let powerSources = IOPSCopyPowerSourcesList(powerInfo)?.takeRetainedValue() as? [CFTypeRef]
+        else {
+            return false
+        }
+
+        for powerSource in powerSources {
+            if let description = IOPSGetPowerSourceDescription(powerInfo, powerSource)?.takeUnretainedValue() as? [String: Any] {
+                if let powerState = description[kIOPSPowerSourceStateKey] as? String {
+                    if powerState == kIOPSACPowerValue {
+                        return true
+                    }
+                }
+            }
+        }
+
+        return false
+    }
+
+    static func getBatteryLevel() -> Int? {
+        guard let powerInfo = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(),
+              let powerSources = IOPSCopyPowerSourcesList(powerInfo)?.takeRetainedValue() as? [CFTypeRef]
+        else {
+            return nil
+        }
+
+        for powerSource in powerSources {
+            if let description = IOPSGetPowerSourceDescription(powerInfo, powerSource)?.takeUnretainedValue() as? [String: Any] {
+                if let type = description[kIOPSTypeKey] as? String,
+                   type == kIOPSInternalBatteryType
+                {
+                    if let currentCapacity = description[kIOPSCurrentCapacityKey] as? Int,
+                       let maxCapacity = description[kIOPSMaxCapacityKey] as? Int,
+                       maxCapacity > 0
+                    {
+                        return (currentCapacity * 100) / maxCapacity
+                    }
+                }
+            }
+        }
+
+        return nil
     }
 }

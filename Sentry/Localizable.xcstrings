@@ -65,6 +65,9 @@
     "Failed to create sleep assertion. Please check your system settings." : {
 
     },
+    "Failed to get battery level. Please check your system settings." : {
+
+    },
     "Failed to get clamshell state. Please check your system settings." : {
 
     },
@@ -80,6 +83,12 @@
     "Lock Your Mac to Activate" : {
 
     },
+    "Mac Lid Closed" : {
+
+    },
+    "Network Disconnected" : {
+
+    },
     "OK" : {
 
     },
@@ -93,6 +102,9 @@
 
     },
     "Please remember to respect the privacy of others." : {
+
+    },
+    "Power Disconnected" : {
 
     },
     "Requesting Camera Access..." : {

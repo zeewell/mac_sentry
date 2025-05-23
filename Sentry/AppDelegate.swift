@@ -38,6 +38,14 @@ class AppDelegate: NSObject, ObservableObject, NSApplicationDelegate {
         }
         let wifi = DeviceCheck.isConnectedToWirelessNetwork()
         print("[*] device check reporting wifi connected: \(wifi)")
+        let power = DeviceCheck.isConnectedToPower()
+        print("[*] device check reporting power connected: \(power)")
+        if let battery = DeviceCheck.getBatteryLevel() {
+            print("[*] device check reporting battery level: \(battery)")
+        } else {
+            print("[*] failed to get battery level")
+            presentError(title: "Sentry", message: "Failed to get battery level. Please check your system settings.")
+        }
     }
 
     func applicationWillTerminate(_: Notification) {
