@@ -9,8 +9,11 @@ import Foundation
 
 class Sentry {
     let configuration: SentryConfiguration
-    init(configuration: SentryConfiguration) {
+    let onAlarmingActivaty: (_ reason: String) -> Void
+
+    init(configuration: SentryConfiguration, onAlarmingActivaty: @escaping (_ reason: String) -> Void) {
         self.configuration = configuration
+        self.onAlarmingActivaty = onAlarmingActivaty
     }
 
     enum Status {

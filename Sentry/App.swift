@@ -14,7 +14,9 @@ struct App: SwiftUI.App {
         WindowGroup {
             ContentView()
         }
-        .commandsRemoved()
+        .commands {
+            CommandGroup(replacing: .newItem) {}
+        }
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
     }

@@ -14,12 +14,14 @@ struct SetupNotificationsView: View {
         FormView(title: "Setup Notifications") {
             VStack(alignment: .leading, spacing: 8) {
                 Text("The easiest way to warn the troublemaker is to play sound. It is recommended to enable.")
+                    .fixedSize(horizontal: false, vertical: true)
                 Divider()
                 Toggle(isOn: $vm.cfg.sentryAlarmsSoundsEnabled) {
                     Text("Play Sound")
                 }
                 Divider()
                 Text("If you have Bark installed on your phone, connect to Bark here. For more information, please visit [https://bark.day.app/](https://bark.day.app/).")
+                    .fixedSize(horizontal: false, vertical: true)
                 Divider()
                 Toggle(isOn: .init(get: {
                     vm.cfg.sentryAlarmsNotificationType == .bark
@@ -41,11 +43,21 @@ struct SetupNotificationsView: View {
                     GridRow {
                         Text("Endpoint")
                         TextField("Server Endpoint", text: $vm.cfg.sentryNotificationConfigBark.endpoint)
+                            .autocorrectionDisabled()
+                            .onChange(of: vm.cfg.sentryNotificationConfigBark.endpoint) { newValue in
+                                guard var url = URL(string: newValue) else { return }
+                                while url.pathComponents.count > 2 {
+                                    url = url.deletingLastPathComponent()
+                                }
+                                var text = url.absoluteString
+                                if text.hasSuffix("/") { text.removeLast() }
+                                guard text != newValue else { return }
+                                vm.cfg.sentryNotificationConfigBark.endpoint = text
+                            }
                     }
                 }
                 .disabled(vm.cfg.sentryAlarmsNotificationType != .bark)
             }
-
         }
     }
 }

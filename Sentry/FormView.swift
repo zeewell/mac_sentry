@@ -7,9 +7,32 @@
 
 import SwiftUI
 
-struct FormView<Content: View>: View {
+struct FormView<Content: View, LeftBottomView: View>: View {
     let title: LocalizedStringKey
+
     @ViewBuilder let formBody: () -> Content
+    @ViewBuilder let leftBottom: () -> LeftBottomView
+
+    init(
+        title: LocalizedStringKey,
+        typeTrick: LeftBottomView = EmptyView(),
+        @ViewBuilder formBody: @escaping () -> Content
+    ) {
+        self.title = title
+        self.formBody = formBody
+        leftBottom = { typeTrick }
+    }
+
+    init(
+        title: LocalizedStringKey,
+        @ViewBuilder leftBottom: @escaping () -> LeftBottomView,
+        @ViewBuilder formBody: @escaping () -> Content
+    ) {
+        self.title = title
+        self.formBody = formBody
+        self.leftBottom = leftBottom
+    }
+
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -23,6 +46,7 @@ struct FormView<Content: View>: View {
             formBody()
             Divider().padding(.horizontal, -16)
             HStack {
+                leftBottom()
                 Spacer()
                 Button("Close") {
                     dismiss()

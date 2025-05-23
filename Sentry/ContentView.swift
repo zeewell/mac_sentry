@@ -5,157 +5,97 @@
 //  Created by 秋星桥 on 5/24/25.
 //
 
-import ColorfulX
 import SwiftUI
 
 struct ContentView: View {
-    @State var openHint: Bool = false
-    @AppStorage("isFirstVisit") var isFirstVisit: Bool = true
-    @StateObject var vm = SentryConfigurationManager.shared
+    @StateObject var vm: ViewModel = .shared
+    @State var sentry: Sentry? = nil
+    @State var hint: String = ""
 
-    enum TitleType {
-        case welcome
-        case setupNow
-        case lockToContinue
-    }
-
-    @State var titleType: TitleType = .welcome
-
-    var title: String {
-        switch titleType {
-        case .welcome:
-            String(localized: "Welcome to Sentry Mode")
-        case .setupNow:
-            String(localized: "Setup with Options Below")
-        case .lockToContinue:
-            String(localized: "Lock Your Mac to Activate")
-        }
-    }
-
-    var versionText: String {
-        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
-        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
-        return String(localized: "Version \(version) (\(build))")
-    }
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
-        VStack(spacing: 32) {
-            Divider().hidden()
-            Image(.icon512)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 64, height: 64)
-                .padding(-8)
-            Text(title)
-                .font(.title)
-                .bold()
-                .contentTransition(.numericText())
-                .animation(.interactiveSpring, value: title)
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        if titleType == .welcome {
-                            if vm.canActivate {
-                                titleType = .lockToContinue
-                            } else {
-                                titleType = .setupNow
-                            }
+        switch vm.status {
+        case .welcome:
+            WelcomePanel()
+                .onReceive(timer) { _ in
+                    guard vm.status == .welcome else { return }
+                    guard sentry == nil else { return }
+                    guard let check = DeviceCheck.isMacLocked(), check else { return }
+                    let sentry: Sentry = .init(
+                        configuration: SentryConfigurationManager.shared.cfg
+                    ) { alarmingReason in
+                        print("[*] alarming reason: \(alarmingReason)")
+                        vm.status = .activityDetected
+                        hint = String(localized: "An alarm was triggered at: \(Date().formatted()). Reason: \(alarmingReason)")
+                    }
+                    self.sentry = sentry
+                    sentry.run()
+                    vm.status = .running
+                }
+        case .running:
+            VStack(spacing: 32) {
+                EyeView()
+            }
+            .padding(64)
+        case .activityDetected:
+            VStack(spacing: 16) {
+                Image(systemName: "light.beacon.max")
+                    .font(.largeTitle)
+                Text("Activity Detected")
+                    .bold()
+                Divider()
+                Text(hint)
+                Divider()
+                Button("Exit") {
+                    exit(0)
+                }
+            }
+            .padding(64)
+        case .completed:
+            VStack(spacing: 16) {
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.largeTitle)
+                    .foregroundStyle(.green)
+                Text("Sentry Mode Completed")
+                    .bold()
+                Divider()
+                HStack {
+                    if sentry?.configuration.sentryRecordingEnabled ?? false {
+                        Button("Open Saved Clips") {
+                            try? FileManager.default.createDirectory(
+                                atPath: videoClipDir.path,
+                                withIntermediateDirectories: true
+                            )
+                            // select the directory
+                            NSWorkspace.shared.selectFile(
+                                nil,
+                                inFileViewerRootedAtPath: videoClipDir.path
+                            )
                         }
                     }
-                }
-                .onChange(of: vm.cfg) { _ in
-                    if vm.canActivate, titleType == .welcome {
-                        titleType = .lockToContinue
+                    Button("Exit") {
+                        exit(0)
                     }
                 }
-            HStack(spacing: 16) {
-                options
             }
-            .padding(.horizontal, 16)
-            Text(versionText)
-                .font(.footnote)
-                .opacity(0.5)
-            Divider().hidden()
-        }
-        .frame(width: 600)
-        .overlay {
-            Image(systemName: "questionmark.circle")
-                .font(.body)
-                .opacity(0.5)
-                .contentShape(Circle())
-                .onTapGesture { openHint = true }
-                .popover(isPresented: $openHint) { HelpPanelView() }
-                .padding(8)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-        }
-        .onAppear {
-            if isFirstVisit {
-                openHint = true
-                isFirstVisit = false
-            }
-        }
-    }
-
-    @State var openSetupAlarm: Bool = false
-    @State var openSetupNotifications: Bool = false
-    @State var openSetupRecordings: Bool = false
-
-    @ViewBuilder
-    var options: some View {
-        SentryOption(
-            icon: "light.beacon.max",
-            text: "Setup Alarms",
-            isActivated: vm.hasTriggerEnabled
-        )
-        .onTapGesture { openSetupAlarm = true }
-        .sheet(isPresented: $openSetupAlarm) {
-            SetupAlarmsView()
-        }
-        SentryOption(
-            icon: "app.badge",
-            text: "Setup Notifications",
-            isActivated: vm.hasNotificationEnabled
-        )
-        .onTapGesture { openSetupNotifications = true }
-        .sheet(isPresented: $openSetupNotifications) {
-            SetupNotificationsView()
-        }
-        SentryOption(
-            icon: "camera",
-            text: "Setup Recordings",
-            isActivated: vm.hasRecordingEnabled
-        )
-        .onTapGesture { openSetupRecordings = true }
-        .sheet(isPresented: $openSetupRecordings) {
-            SetupRecordingsView()
+            .padding(64)
         }
     }
 }
 
-struct SentryOption: View {
-    let icon: String
-    let text: LocalizedStringKey
-    let isActivated: Bool
+class ViewModel: ObservableObject {
+    static let shared = ViewModel()
+    private init() {}
 
-    var body: some View {
-        VStack(spacing: 8) {
-            Image(systemName: icon)
-                .bold()
-            Text(text)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(12)
-        .padding(.horizontal, 8)
-        .background(Color.gray.opacity(0.1))
-        .contentShape(Rectangle())
-        .clipShape(RoundedRectangle(cornerRadius: 8))
-        .overlay {
-            Image(systemName: "checkmark.circle.fill")
-                .foregroundColor(.green)
-                .opacity(isActivated ? 1 : 0)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                .offset(x: 4, y: -4)
-        }
+    enum PanelStatus {
+        case welcome
+        case running
+        case activityDetected
+        case completed
     }
+
+    @Published var status: PanelStatus = .welcome
 }
 
 #Preview {

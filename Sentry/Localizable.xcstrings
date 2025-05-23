@@ -13,13 +13,29 @@
     "3. Disconnecting the power adapter." : {
 
     },
+    "Activity Detected" : {
+
+    },
     "Additionally, you can set up **Camera Recording**. When using camera recordings, please respect others' privacy." : {
 
     },
     "Alarm triggers are used to fire the alarm when certain conditions are met." : {
 
     },
+    "An alarm was triggered at: %@. Reason: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "An alarm was triggered at: %1$@. Reason: %2$@"
+          }
+        }
+      }
+    },
     "Available triggers include:" : {
+
+    },
+    "Camera Access Denied" : {
 
     },
     "Close" : {
@@ -34,7 +50,13 @@
     "Disconnected from Power Adapter" : {
 
     },
+    "Enable Camera Recording" : {
+
+    },
     "Endpoint" : {
+
+    },
+    "Exit" : {
 
     },
     "Failed to create display assertion. Please check your system settings." : {
@@ -64,10 +86,22 @@
     "Once set up, Sentry Mode will **automatically activate** when you **lock** your device." : {
 
     },
+    "Open Saved Clips" : {
+
+    },
     "Play Sound" : {
 
     },
+    "Please remember to respect the privacy of others." : {
+
+    },
+    "Requesting Camera Access..." : {
+
+    },
     "Sentry" : {
+
+    },
+    "Sentry Mode Completed" : {
 
     },
     "Sentry Mode will not prevent your Mac from being stolen or damaged, but it can help you locate your Mac or identify the troublemaker." : {
@@ -111,6 +145,9 @@
 
     },
     "When a selected trigger occurs, Sentry Mode will either play a sound or send you a notification." : {
+
+    },
+    "You can enable camera recording when Sentry Mode is activated." : {
 
     }
   },
