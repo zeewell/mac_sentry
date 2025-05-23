@@ -26,7 +26,7 @@ struct ContentView: View {
         case .welcome:
             String(localized: "Welcome to Sentry Mode")
         case .setupNow:
-            String(localized: "Setup Sentry Mode Using Options Below")
+            String(localized: "Setup with Options Below")
         case .lockToContinue:
             String(localized: "Lock Your Mac to Activate")
         }

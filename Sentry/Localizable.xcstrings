@@ -34,6 +34,9 @@
     "Disconnected from Power Adapter" : {
 
     },
+    "Endpoint" : {
+
+    },
     "Failed to create display assertion. Please check your system settings." : {
 
     },
@@ -44,6 +47,9 @@
 
     },
     "Failed to get screen lock state. Please check your system settings." : {
+
+    },
+    "If you have Bark installed on your phone, connect to Bark here. For more information, please visit [https://bark.day.app/](https://bark.day.app/)." : {
 
     },
     "Location based detection is not available, you should setup **Find My Mac** instead." : {
@@ -58,13 +64,16 @@
     "Once set up, Sentry Mode will **automatically activate** when you **lock** your device." : {
 
     },
+    "Play Sound" : {
+
+    },
     "Sentry" : {
 
     },
     "Sentry Mode will not prevent your Mac from being stolen or damaged, but it can help you locate your Mac or identify the troublemaker." : {
 
     },
-    "Sentry Notification" : {
+    "Server Endpoint" : {
 
     },
     "Setup Alarm Triggers" : {
@@ -79,7 +88,13 @@
     "Setup Recordings" : {
 
     },
-    "Setup Sentry Mode Using Options Below" : {
+    "Setup with Options Below" : {
+
+    },
+    "The easiest way to warn the troublemaker is to play sound. It is recommended to enable." : {
+
+    },
+    "Use Bark" : {
 
     },
     "Version %@ (%@)" : {

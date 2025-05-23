@@ -51,12 +51,9 @@ struct SentryConfiguration: Codable, Equatable, Hashable {
         case bark
     }
 
-    var sentryNotificationConfigBark: NotificationConfiguration_Bark?
+    var sentryNotificationConfigBark: NotificationConfiguration_Bark = .init()
     struct NotificationConfiguration_Bark: Codable, Equatable, Hashable {
         var endpoint: String = "https://"
-        var group: String = .init(localized: "Sentry Notification")
-        var icon: String = ""
-        var sound: String = "bell"
     }
 
     var sentryRecordingEnabled: Bool = false
