@@ -1,0 +1,79 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "**Sentry Mode** is a feature that detects and responds to potential theft or unauthorized access when you leave your Mac." : {
+
+    },
+    "1. Closing your Mac's lid." : {
+
+    },
+    "2. Disconnecting from the internet." : {
+
+    },
+    "3. Disconnecting the power adapter." : {
+
+    },
+    "Additionally, you can set up **Camera Recording**. When using camera recordings, please respect others' privacy." : {
+
+    },
+    "Available triggers include:" : {
+
+    },
+    "Failed to create display assertion. Please check your system settings." : {
+
+    },
+    "Failed to create sleep assertion. Please check your system settings." : {
+
+    },
+    "Failed to get clamshell state. Please check your system settings." : {
+
+    },
+    "Failed to get screen lock state. Please check your system settings." : {
+
+    },
+    "Location based detection is not available, you should setup **Find My Mac** instead." : {
+
+    },
+    "OK" : {
+
+    },
+    "Once set up, Sentry Mode will **automatically activate** when you **lock** your device." : {
+
+    },
+    "Sentry" : {
+
+    },
+    "Sentry Mode will not prevent your Mac from being stolen or damaged, but it can help you locate your Mac or identify the troublemaker." : {
+
+    },
+    "Setup Alarms" : {
+
+    },
+    "Setup Notifications" : {
+
+    },
+    "Setup Recordings" : {
+
+    },
+    "Version %@ (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Version %1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "Welcome to Sentry Mode" : {
+
+    },
+    "When a selected trigger occurs, Sentry Mode will either play a sound or send you a notification." : {
+
+    }
+  },
+  "version" : "1.0"
+}

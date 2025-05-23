@@ -19,7 +19,7 @@ struct ContentView: View {
     }
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 32) {
             Divider().hidden()
             Image(.icon512)
                 .resizable()
@@ -38,7 +38,7 @@ struct ContentView: View {
                 .opacity(0.5)
             Divider().hidden()
         }
-        .frame(width: 555)
+        .frame(width: 600)
         .overlay {
             Image(systemName: "questionmark.circle")
                 .font(.body)

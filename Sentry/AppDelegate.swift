@@ -7,13 +7,92 @@
 
 import Cocoa
 import Foundation
+import IOKit
+import IOKit.pwr_mgt
+import SwiftUI
 
 class AppDelegate: NSObject, NSApplicationDelegate {
+    private var sleepAssertionID: IOPMAssertionID = 0
+    private var displayAssertionID: IOPMAssertionID = 0
+    
     override init() {
         super.init()
     }
 
     func applicationDidFinishLaunching(_: Notification) {
         _ = MouseLocation.shared
+        preventSleep()
+        preventDisplaySleep()
+        if let isClamshellClosed = DeviceCheck.isMacLidClosed() {
+            print("[*] clamshell closed: \(isClamshellClosed)")
+        } else {
+            print("[*] failed to get clamshell state")
+            presentError(title: "Sentry", message: "Failed to get clamshell state. Please check your system settings.")
+        }
+        if let isLocked = DeviceCheck.isMacLocked() {
+            print("[*] screen locked: \(isLocked)")
+        } else {
+            print("[*] failed to get screen lock state")
+            presentError(title: "Sentry", message: "Failed to get screen lock state. Please check your system settings.")
+        }
     }
+    
+    func applicationWillTerminate(_ notification: Notification) {
+        allowSleep()
+        allowDisplaySleep()
+    }
+    
+    private func preventSleep() {
+        let reason = "Sentry app is monitoring system" as CFString
+        let result = IOPMAssertionCreateWithName(
+            kIOPMAssertionTypeNoIdleSleep as CFString,
+            IOPMAssertionLevel(kIOPMAssertionLevelOn),
+            reason,
+            &sleepAssertionID
+        )
+        
+        if result != kIOReturnSuccess {
+            print("[*] failed to create sleep assertion: \(result)")
+            presentError(title: "Sentry", message: "Failed to create sleep assertion. Please check your system settings.")
+        }
+    }
+    
+    private func allowSleep() {
+        if sleepAssertionID != 0 {
+            IOPMAssertionRelease(sleepAssertionID)
+            sleepAssertionID = 0
+        }
+    }
+    
+    private func preventDisplaySleep() {
+        let reason = "Sentry app is monitoring display" as CFString
+        let result = IOPMAssertionCreateWithName(
+            kIOPMAssertionTypeNoDisplaySleep as CFString,
+            IOPMAssertionLevel(kIOPMAssertionLevelOn),
+            reason,
+            &displayAssertionID
+        )
+        
+        if result != kIOReturnSuccess {
+            print("[*] failed to create display assertion: \(result)")
+            presentError(title: "Sentry", message: "Failed to create display assertion. Please check your system settings.")
+        }
+    }
+    
+    private func allowDisplaySleep() {
+        if displayAssertionID != 0 {
+            IOPMAssertionRelease(displayAssertionID)
+            displayAssertionID = 0
+        }
+    }
+    
+    private func presentError(title: String.LocalizationValue, message: String.LocalizationValue) {
+        let alert = NSAlert()
+        alert.messageText = String(localized: title)
+        alert.informativeText = String(localized: message)
+        alert.alertStyle = .critical
+        alert.addButton(withTitle: String(localized: "OK"))
+        alert.runModal()
+    }
+
 }
