@@ -5,9 +5,12 @@
 //  Created by 秋星桥 on 5/24/25.
 //
 
+import ColorfulX
 import SwiftUI
 
 struct SentryView: View {
+    @StateObject var sentry: Sentry
+
     @State var globalOpacity: Double = 0
     @State var showEye = false
 
@@ -25,6 +28,15 @@ struct SentryView: View {
                 showEye = true
             }
         }
+        .foregroundStyle(sentry.isAlrming ? .white : .primary)
+        .background(
+            ZStack {
+                if sentry.isAlrming {
+                    ColorfulView(color: .sunset, noise: .constant(64))
+                        .ignoresSafeArea()
+                }
+            }
+        )
         .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 32))
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -51,6 +63,7 @@ struct SentryView: View {
     var eye: some View {
         ZStack {
             Rectangle()
+                .foregroundStyle(.black.opacity(0.5))
                 .frame(width: 10, height: 888)
             if showEye {
                 EyeView()
@@ -64,6 +77,8 @@ struct SentryView: View {
 }
 
 #Preview {
-    SentryView()
+    let s = Sentry(configuration: .init(), onAlarmingActivaty: { _ in })
+    return SentryView(sentry: s)
+        .onAppear { s.isAlrming = true }
         .frame(width: 700, height: 400)
 }

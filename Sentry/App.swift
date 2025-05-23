@@ -18,6 +18,6 @@ struct App: SwiftUI.App {
             CommandGroup(replacing: .newItem) {}
         }
         .windowStyle(.hiddenTitleBar)
-        .windowResizability(.contentSize)
+        .windowResizability(.contentMinSize)
     }
 }

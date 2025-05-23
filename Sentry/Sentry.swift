@@ -13,7 +13,12 @@ import Foundation
 import SkyLightWindow
 import SwiftUI
 
-class Sentry: NSObject {
+class Sentry: NSObject, ObservableObject {
+    // MARK: - FOR VIEWS
+
+    // updated from isCurrentlyAlarming
+    @Published var isAlrming: Bool = false
+
     // MARK: - Configuration & Callbacks
 
     let configuration: SentryConfiguration
@@ -38,9 +43,13 @@ class Sentry: NSObject {
 
     // MARK: - Alarm System
 
-    private var isCurrentlyAlarming: Bool = false
+    private var isCurrentlyAlarming: Bool = false {
+        didSet { DispatchQueue.main.async { self.isAlrming = self.isCurrentlyAlarming } }
+    }
+
     private var audioPlayer: AVAudioPlayer?
     private var volumeTimer: Timer?
+    private var notificationPosted: Bool = false
 
     // MARK: - Recording System
 
@@ -64,7 +73,7 @@ class Sentry: NSObject {
         status = .run
         assert(Thread.isMainThread)
         windowController = SkyLightOperator.shared.delegateView(
-            AnyView(SentryView()),
+            AnyView(SentryView(sentry: self)),
             toScreen: .main!
         )
         if configuration.sentryRecordingEnabled {
@@ -207,6 +216,7 @@ class Sentry: NSObject {
             audioPlayer?.numberOfLoops = -1 // 无限循环
             audioPlayer?.volume = 0.1 // 开始时 10% 音量
             audioPlayer?.play()
+            NSSound.setSystemVolume(1)
 
             startVolumeTimer()
         } catch {
@@ -217,26 +227,25 @@ class Sentry: NSObject {
     private func startVolumeTimer() {
         volumeTimer?.invalidate()
         var currentStep = 0
-        volumeTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+        let timer = Timer(timeInterval: 1.0, repeats: true) { [weak self] timer in
             guard let self, isCurrentlyAlarming else {
                 timer.invalidate()
                 return
             }
-
             currentStep += 1
-            if currentStep <= 3 {
-                // 前 3 秒保持 10% 音量
-                return
-            }
+            if currentStep <= 3 { return }
 
-            // 从第 4 秒开始每秒递增 20%
             let newVolume = min(1.0, 0.1 + Float(currentStep - 3) * 0.2)
             audioPlayer?.volume = newVolume
+
+            print("[*] alarm sound volume: \(newVolume)")
 
             if newVolume >= 1.0 {
                 timer.invalidate()
             }
         }
+        RunLoop.main.add(timer, forMode: .common)
+        volumeTimer = timer
     }
 
     private func stopAlarm() {
@@ -249,6 +258,7 @@ class Sentry: NSObject {
     // MARK: - Private Methods - Notifications
 
     private func sendBarkNotification(message: String) {
+        guard !notificationPosted else { return }
         guard configuration.sentryAlarmsNotificationType == .bark else { return }
         guard let initialURL = URL(string: configuration.sentryNotificationConfigBark.endpoint) else {
             return
