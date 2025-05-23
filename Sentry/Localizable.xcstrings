@@ -101,6 +101,9 @@
     "Sentry" : {
 
     },
+    "Sentry Mode" : {
+
+    },
     "Sentry Mode Completed" : {
 
     },
@@ -126,6 +129,9 @@
 
     },
     "The easiest way to warn the troublemaker is to play sound. It is recommended to enable." : {
+
+    },
+    "This Mac is connected to the internet and is monitoring your behavior." : {
 
     },
     "Use Bark" : {

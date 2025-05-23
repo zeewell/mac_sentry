@@ -51,7 +51,12 @@ class Sentry {
     func stop() {
         guard status == .run else { return }
         status = .tearingDown
-        windowController?.close()
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 0.3
+            windowController?.window?.contentView?.animator().alphaValue = 0
+        } completionHandler: {
+            self.windowController?.close()
+        }
     }
 
     private func executeOnce() {}

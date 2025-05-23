@@ -83,6 +83,7 @@ struct EyeView: View {
             pupilScale = 0.8
             isPulsing = true
         }
+        .frame(width: 200, height: 200)
     }
 }
 
