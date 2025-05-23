@@ -11,6 +11,26 @@ import SwiftUI
 struct ContentView: View {
     @State var openHint: Bool = false
     @AppStorage("isFirstVisit") var isFirstVisit: Bool = true
+    @StateObject var vm = SentryConfigurationManager.shared
+
+    enum TitleType {
+        case welcome
+        case setupNow
+        case lockToContinue
+    }
+
+    @State var titleType: TitleType = .welcome
+
+    var title: String {
+        switch titleType {
+        case .welcome:
+            String(localized: "Welcome to Sentry Mode")
+        case .setupNow:
+            String(localized: "Setup Sentry Mode Using Options Below")
+        case .lockToContinue:
+            String(localized: "Lock Your Mac to Activate")
+        }
+    }
 
     var versionText: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -26,9 +46,27 @@ struct ContentView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 64, height: 64)
                 .padding(-8)
-            Text("Welcome to Sentry Mode")
+            Text(title)
                 .font(.title)
                 .bold()
+                .contentTransition(.numericText())
+                .animation(.interactiveSpring, value: title)
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        if titleType == .welcome {
+                            if vm.canActivate {
+                                titleType = .lockToContinue
+                            } else {
+                                TitleType = .setupNow
+                            }
+                        }
+                    }
+                }
+                .onChange(of: vm.cfg) { _ in
+                    if vm.canActivate, titleType == .welcome {
+                        titleType = .lockToContinue
+                    }
+                }
             HStack(spacing: 16) {
                 options
             }
@@ -66,7 +104,7 @@ struct ContentView: View {
         SentryOption(
             icon: "light.beacon.max",
             text: "Setup Alarms",
-            isActivated: false
+            isActivated: vm.hasTriggerEnabled
         )
         .onTapGesture { openSetupAlarm = true }
         .sheet(isPresented: $openSetupAlarm) {
@@ -75,7 +113,7 @@ struct ContentView: View {
         SentryOption(
             icon: "app.badge",
             text: "Setup Notifications",
-            isActivated: false
+            isActivated: vm.hasNotificationEnabled
         )
         .onTapGesture { openSetupNotifications = true }
         .sheet(isPresented: $openSetupNotifications) {
@@ -84,7 +122,7 @@ struct ContentView: View {
         SentryOption(
             icon: "camera",
             text: "Setup Recordings",
-            isActivated: false
+            isActivated: vm.hasRecordingEnabled
         )
         .onTapGesture { openSetupRecordings = true }
         .sheet(isPresented: $openSetupRecordings) {
@@ -110,6 +148,13 @@ struct SentryOption: View {
         .background(Color.gray.opacity(0.1))
         .contentShape(Rectangle())
         .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundColor(.green)
+                .opacity(isActivated ? 1 : 0)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                .offset(x: 4, y: -4)
+        }
     }
 }
 

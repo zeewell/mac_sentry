@@ -8,37 +8,56 @@
 import Foundation
 import SwiftUI
 
-class SentryConfiguration: ObservableObject {
-    static let shared = SentryConfiguration()
+class SentryConfigurationManager: ObservableObject {
+    static let shared = SentryConfigurationManager()
+    private init() {}
 
-    @PublishedPersist(key: "sentry.triggers.lid", defaultValue: false)
-    var sentryTriggersLidEnabled: Bool
-    @PublishedPersist(key: "sentry.triggers.internet", defaultValue: false)
-    var sentryTriggersInternetEnabled: Bool
-    @PublishedPersist(key: "sentry.triggers.power", defaultValue: false)
-    var sentryTriggersPowerEnabled: Bool
+    @PublishedPersist(key: "sentry.config", defaultValue: .init())
+    var cfg: SentryConfiguration
 
-    @PublishedPersist(key: "sentry.alarms.sounds", defaultValue: false)
-    var sentryAlarmsSoundsEnabled: Bool
-    @PublishedPersist(key: "sentry.alarms.notifications", defaultValue: .none)
-    var sentryAlarmsNotificationType: NotificationType
+    var hasTriggerEnabled: Bool {
+        false
+            || cfg.sentryTriggersLidEnabled
+            || cfg.sentryTriggersInternetEnabled
+            || cfg.sentryTriggersPowerEnabled
+    }
 
-    enum NotificationType: String, Codable, RawRepresentable {
+    var hasNotificationEnabled: Bool {
+        false
+            || cfg.sentryAlarmsNotificationType != .none
+            || cfg.sentryAlarmsSoundsEnabled
+    }
+
+    var hasRecordingEnabled: Bool {
+        false
+            || cfg.sentryRecordingEnabled
+    }
+
+    var canActivate: Bool {
+        hasTriggerEnabled && hasNotificationEnabled
+    }
+}
+
+struct SentryConfiguration: Codable, Equatable, Hashable {
+    var sentryTriggersLidEnabled: Bool = false
+    var sentryTriggersInternetEnabled: Bool = false
+    var sentryTriggersPowerEnabled: Bool = false
+
+    var sentryAlarmsSoundsEnabled: Bool = false
+
+    var sentryAlarmsNotificationType: NotificationType = .none
+    enum NotificationType: String, Codable, Equatable, Hashable {
         case none
         case bark
     }
 
-    @PublishedPersist(key: "sentry.notification.config.bark", defaultValue: nil)
     var sentryNotificationConfigBark: NotificationConfiguration_Bark?
-
-    struct NotificationConfiguration_Bark: Codable {
+    struct NotificationConfiguration_Bark: Codable, Equatable, Hashable {
         var endpoint: String = "https://"
         var group: String = .init(localized: "Sentry Notification")
         var icon: String = ""
         var sound: String = "bell"
     }
 
-    private init() {
-        print("[*] SentryConfiguration initialized")
-    }
+    var sentryRecordingEnabled: Bool = false
 }

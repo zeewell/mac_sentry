@@ -16,10 +16,22 @@
     "Additionally, you can set up **Camera Recording**. When using camera recordings, please respect others' privacy." : {
 
     },
+    "Alarm triggers are used to fire the alarm when certain conditions are met." : {
+
+    },
     "Available triggers include:" : {
 
     },
     "Close" : {
+
+    },
+    "Closing Lid" : {
+
+    },
+    "Disconnected from Internet" : {
+
+    },
+    "Disconnected from Power Adapter" : {
 
     },
     "Failed to create display assertion. Please check your system settings." : {
@@ -37,6 +49,9 @@
     "Location based detection is not available, you should setup **Find My Mac** instead." : {
 
     },
+    "Lock Your Mac to Activate" : {
+
+    },
     "OK" : {
 
     },
@@ -50,6 +65,9 @@
 
     },
     "Sentry Notification" : {
+
+    },
+    "Setup Alarm Triggers" : {
 
     },
     "Setup Alarms" : {

@@ -11,7 +11,7 @@ import IOKit
 import IOKit.pwr_mgt
 import SwiftUI
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, ObservableObject, NSApplicationDelegate {
     private var sleepAssertionID: IOPMAssertionID = 0
     private var displayAssertionID: IOPMAssertionID = 0
 
@@ -21,7 +21,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_: Notification) {
-        _ = SentryConfiguration.shared
         _ = MouseLocation.shared
         preventSleep()
         preventDisplaySleep()
