@@ -9,8 +9,12 @@ import SwiftUI
 
 struct SentryView: View {
     var body: some View {
-        ZStack {
-            Spacer()
+        GeometryReader { _ in
         }
     }
+}
+
+#Preview {
+    SentryView()
+        .frame(width: 1366, height: 768)
 }

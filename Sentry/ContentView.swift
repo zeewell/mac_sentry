@@ -38,6 +38,13 @@ struct ContentView: View {
                 EyeView()
             }
             .padding(64)
+            .onReceive(timer) { _ in
+                guard vm.status == .running else { return }
+                guard let sentry else { return }
+                if DeviceCheck.isMacLocked() ?? true { return }
+                vm.status = .completed
+                sentry.stop()
+            }
         case .activityDetected:
             VStack(spacing: 16) {
                 Image(systemName: "light.beacon.max")
@@ -52,6 +59,14 @@ struct ContentView: View {
                 }
             }
             .padding(64)
+            .onReceive(timer) { _ in
+                guard vm.status == .activityDetected else { return }
+                guard let sentry else { return }
+                // if the mac is locked, continue to run
+                if DeviceCheck.isMacLocked() ?? true { return }
+                // unlocked, stop the sentry
+                sentry.stop()
+            }
         case .completed:
             VStack(spacing: 16) {
                 Image(systemName: "checkmark.circle.fill")
@@ -80,6 +95,9 @@ struct ContentView: View {
                 }
             }
             .padding(64)
+            .onAppear {
+                sentry?.stop()
+            }
         }
     }
 }
