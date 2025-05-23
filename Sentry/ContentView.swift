@@ -57,7 +57,7 @@ struct ContentView: View {
                             if vm.canActivate {
                                 titleType = .lockToContinue
                             } else {
-                                TitleType = .setupNow
+                                titleType = .setupNow
                             }
                         }
                     }
