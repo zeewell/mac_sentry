@@ -9,10 +9,11 @@ Picture this: you're vibing and coding in a coffee shop when nature calls. You h
 ![Preview Image](./Resources/Preview.png)
 
 ## Features
-🔒 **Comprehensive Monitoring**: Track lid status, network connectivity, and power connection
-📹 **Automatic Recording**: Records video clips when enabled
-🚨 **Multi-Alert System**: Sound alarms and push notifications via Bark
-🎯 **Real-time Detection**: Instant monitoring of device state changes
+
+- 🔒 **Comprehensive Monitoring**: Track lid status, network connectivity, and power connection
+- 📹 **Automatic Recording**: Records video clips when enabled
+- 🚨 **Multi-Alert System**: Sound alarms and push notifications via Bark
+- 🎯 **Real-time Detection**: Instant monitoring of device state changes
 
 ## System Requirements
 
