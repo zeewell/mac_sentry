@@ -19,6 +19,10 @@ class AppDelegate: NSObject, ObservableObject, NSApplicationDelegate {
         super.init()
         print("[*] AppDelegate initialized")
     }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        true
+    }
 
     func applicationDidFinishLaunching(_: Notification) {
         _ = MouseLocation.shared
