@@ -20,6 +20,8 @@ Picture this: you're vibing and coding in a coffee shop when nature calls. You h
 - macOS 13.0+
 - Camera access permission for video recording
 
+## Disable Auto Sleep
+
 You may need to disable sleep mode to ensure a working alarm using command line below:
 
 ```bash
