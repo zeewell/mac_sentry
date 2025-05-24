@@ -273,7 +273,7 @@ class Sentry: NSObject, ObservableObject {
             .init(name: "group", value: String(localized: "Sentry - Mac")),
             .init(name: "isArchive", value: "1"),
             .init(name: "call", value: "1"),
-            .init(name: "icon", value: "https://github.com/Lakr233/Sentry/blob/main/Sentry/Assets.xcassets/icon-512.imageset/icon-512@2x.png?raw=true")
+            .init(name: "icon", value: "https://github.com/Lakr233/Sentry/blob/main/Sentry/Assets.xcassets/icon-512.imageset/icon-512@2x.png?raw=true"),
         ]
         let url = comps.url
         guard let url else { return }

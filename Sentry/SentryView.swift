@@ -53,7 +53,7 @@ struct SentryView: View {
                 .font(.largeTitle)
                 .opacity(0.2)
             Spacer()
-            Text("Sentry")
+            Text("Sentry Activated")
                 .bold()
                 .font(.largeTitle)
             Text("This Mac is connected to the internet and is monitoring your behavior.")

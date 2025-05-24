@@ -40,7 +40,7 @@ enum Security {
             let req = try secCall { SecRequirementCreateWithString(requirementText as NSString, [], $0) }
             let url = URL(fileURLWithPath: CommandLine.arguments.first!)
             let code = try secCall { SecStaticCodeCreateWithPath(url as NSURL, [], $0) }
-            
+
             var errorQ: Unmanaged<CFError>?
             let err = SecStaticCodeCheckValidityWithErrors(code, [], req, &errorQ)
             if err == errSecSuccess { return true }

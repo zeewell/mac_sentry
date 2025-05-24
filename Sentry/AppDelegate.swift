@@ -19,8 +19,8 @@ class AppDelegate: NSObject, ObservableObject, NSApplicationDelegate {
         super.init()
         print("[*] AppDelegate initialized")
     }
-    
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+
+    func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool {
         true
     }
 
