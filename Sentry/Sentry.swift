@@ -264,13 +264,13 @@ class Sentry: NSObject, ObservableObject {
             return
         }
         let newURL = initialURL
-            .appendingPathComponent(String(localized: "Sentry Mode - Mac"))
+            .appendingPathComponent(String(localized: "Sentry - Mac"))
             .appendingPathComponent(message)
         guard var comps = URLComponents(url: newURL, resolvingAgainstBaseURL: false) else { return }
         comps.queryItems = [
             .init(name: "level", value: "critical"),
             .init(name: "volume", value: "5"),
-            .init(name: "group", value: String(localized: "Sentry Mode - Mac")),
+            .init(name: "group", value: String(localized: "Sentry - Mac")),
             .init(name: "isArchive", value: "1"),
             .init(name: "call", value: "1"),
         ]

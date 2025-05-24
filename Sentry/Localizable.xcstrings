@@ -1,12 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "**Sentry Mode** is a feature that detects and responds to potential theft or unauthorized access when you leave your Mac." : {
+    "**Sentry** adds a feature that detects and responds to potential theft or unauthorized access when you leave your Mac." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**哨兵模式** 是一个能够在 Mac 锁定时检测电脑状态并阻止潜在危险的功能。"
+            "value" : "**哨兵** 是一个能够在 Mac 锁定时检测电脑状态并阻止潜在危险的功能。"
           }
         }
       }
@@ -197,12 +197,12 @@
         }
       }
     },
-    "Lock Your Mac to Activate Sentry Mode" : {
+    "Lock Your Mac to Activate Sentry" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "锁定你的 Mac 来激活哨兵模式"
+            "value" : "锁定你的 Mac 来激活哨兵"
           }
         }
       }
@@ -237,15 +237,19 @@
         }
       }
     },
-    "Once set up, Sentry Mode will **automatically activate** when you **lock** your device." : {
+    "Once set up, Sentry  will **automatically activate** when you **lock** your device." : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "当设置完毕后，哨兵模式会在 **锁定** 时 **自动启动**。"
+            "value" : "当设置完毕后，哨兵会在 **锁定** 时 **自动启动**。"
           }
         }
       }
+    },
+    "Once set up, Sentry will **automatically activate** when you **lock** your device." : {
+
     },
     "Open Saved Clips" : {
       "localizations" : {
@@ -307,42 +311,32 @@
         }
       }
     },
-    "Sentry Mode" : {
+    "Sentry - Mac" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "哨兵模式"
+            "value" : "哨兵 - Mac"
           }
         }
       }
     },
-    "Sentry Mode - Mac" : {
+    "Sentry Completed" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "哨兵模式 - Mac"
+            "value" : "哨兵已完成"
           }
         }
       }
     },
-    "Sentry Mode Completed" : {
+    "Sentry will not prevent your Mac from being stolen or damaged, but it can help you locate your Mac or identify the troublemaker." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "哨兵模式结束"
-          }
-        }
-      }
-    },
-    "Sentry Mode will not prevent your Mac from being stolen or damaged, but it can help you locate your Mac or identify the troublemaker." : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "哨兵模式不能阻止你的 Mac 被偷窃或者损坏，但能一定程度减少这些事情发生的可能性，并帮助你确认是谁闯了祸。"
+            "value" : "哨兵不能阻止你的 Mac 被偷窃或者损坏，但能一定程度减少这些事情发生的可能性，并帮助你确认是谁闯了祸。"
           }
         }
       }
@@ -463,32 +457,32 @@
         }
       }
     },
-    "Welcome to Sentry Mode" : {
+    "Welcome to Sentry" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "欢迎来到哨兵模式"
+            "value" : "欢迎来到哨兵"
           }
         }
       }
     },
-    "When a selected trigger occurs, Sentry Mode will either play a sound or send you a notification." : {
+    "When a selected trigger occurs, Sentry will either play a sound or send you a notification." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "当选中的触发器被触发时，哨兵模式会播放声音或者向你发送通知。"
+            "value" : "当选中的触发器被触发时，哨兵会播放声音或者向你发送通知。"
           }
         }
       }
     },
-    "You can enable camera recording when Sentry Mode is activated." : {
+    "You can enable camera recording when Sentry is activated." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "你可以在开启哨兵模式时启用录制。"
+            "value" : "你可以在开启哨兵时启用录制。"
           }
         }
       }

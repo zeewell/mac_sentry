@@ -114,7 +114,7 @@ struct SetupRecordingsView: View {
             }
         }) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("You can enable camera recording when Sentry Mode is activated.")
+                Text("You can enable camera recording when Sentry is activated.")
                     .fixedSize(horizontal: false, vertical: true)
                 Divider()
                 Toggle(isOn: $vm.cfg.sentryRecordingEnabled) {

@@ -86,7 +86,7 @@ struct ContentView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.largeTitle)
                     .foregroundStyle(.green)
-                Text("Sentry Mode Completed")
+                Text("Sentry Completed")
                     .bold()
                 Divider()
                 HStack {

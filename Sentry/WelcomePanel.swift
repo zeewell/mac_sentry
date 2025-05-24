@@ -24,11 +24,11 @@ struct WelcomePanel: View {
     var title: String {
         switch titleType {
         case .welcome:
-            String(localized: "Welcome to Sentry Mode")
+            String(localized: "Welcome to Sentry")
         case .setupNow:
             String(localized: "Setup with Options Below")
         case .lockToContinue:
-            String(localized: "Lock Your Mac to Activate Sentry Mode")
+            String(localized: "Lock Your Mac to Activate Sentry")
         }
     }
 
