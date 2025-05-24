@@ -427,6 +427,16 @@
         }
       }
     },
+    "Sleep hold service is enabled. Your Mac wont sleep automatically." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "阻眠服务已连接，你的 Mac 在盒上盖子时将不会自动睡眠。"
+          }
+        }
+      }
+    },
     "The easiest way to warn the troublemaker is to play sound. It is recommended to enable." : {
       "localizations" : {
         "zh-Hans" : {

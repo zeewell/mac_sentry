@@ -93,6 +93,7 @@ class Sentry: NSObject, ObservableObject {
         status = .tearingDown
         stopRecording()
         unlockAlarm()
+        SentryConfigurationManager.shared.disconnectFromSleepHold()
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.3
             windowController?.window?.contentView?.animator().alphaValue = 0
@@ -124,6 +125,8 @@ class Sentry: NSObject, ObservableObject {
 
     private func executeOnce() {
         guard !isCurrentlyAlarming else { return }
+        
+        SentryConfigurationManager.shared.communicateWithSleepHoldServiceIfNeeded()
 
         if configuration.sentryTriggersLidEnabled {
             checkLidState()

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SetupAlarmsView: View {
     @StateObject var vm = SentryConfigurationManager.shared
-
+    
     var body: some View {
         FormView(title: "Setup Alarm Triggers", leftBottom: {
             Button("Learn More - Disable Auto Sleep") {
@@ -30,8 +30,13 @@ struct SetupAlarmsView: View {
                     Text("Disconnected from Power Adapter")
                 }
                 Divider()
-                Text("Note that you may need to disable Mac's automatic sleep feature for these triggers to work effectively.")
-                    .fixedSize(horizontal: false, vertical: true)
+                if vm.sleepHoldServiceIdentifier.isEmpty {
+                    Text("Note that you may need to disable Mac's automatic sleep feature for these triggers to work effectively.")
+                        .fixedSize(horizontal: false, vertical: true)
+                } else {
+                    Text("Sleep hold service is enabled. Your Mac wont sleep automatically.")
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }

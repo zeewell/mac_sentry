@@ -22,6 +22,16 @@ Picture this: you're vibing and coding in a coffee shop when nature calls. You h
 
 ## Disable Auto Sleep
 
+### Option 1: Use SleepHoldService
+
+Sentry automatically prevents your Mac from sleeping by utilizing [SleepHoldService](https://github.com/Lakr233/SleepHoldService). Install this service by running the following terminal command:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Lakr233/SleepHoldService/HEAD/net_install.sh)"
+```
+
+### Option 2: Use `pmset` Command
+
 You may need to disable sleep mode to ensure a working alarm using command line below:
 
 ```bash
