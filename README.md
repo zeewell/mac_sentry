@@ -20,7 +20,17 @@ Picture this: you're vibing and coding in a coffee shop when nature calls. You h
 - macOS 13.0+
 - Camera access permission for video recording
 
-## Disable Auto Sleep
+## Installation
+
+1. Download the latest release from the [Releases page](https://github.com/Lakr233/Sentry/releases).
+2. Drag the Sentry app into your Applications folder.
+3. Disable auto sleep mode (see instructions below).
+4. When you need it, launch Sentry from your Applications folder.
+5. Grant camera access when prompted. (Optional)
+
+## Installation - Disable Auto Sleep
+
+To ensure Sentry works effectively, you need to prevent your Mac from sleeping. Without this setup, if someone closes the lid quickly, your Mac may go to sleep before Sentry can trigger sound alerts or send notifications. Use one of the following methods to resolve this issue:
 
 ### Option 1: Use SleepHoldService
 
