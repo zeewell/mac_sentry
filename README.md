@@ -20,6 +20,18 @@ Picture this: you're vibing and coding in a coffee shop when nature calls. You h
 - macOS 13.0+
 - Camera access permission for video recording
 
+You may need to disable sleep mode to ensure a working alarm using command line below:
+
+```bash
+sudo pmset -a disablesleep 1
+```
+
+To re-enable sleep mode, use:
+
+```bash
+sudo pmset -a disablesleep 0
+```
+
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
