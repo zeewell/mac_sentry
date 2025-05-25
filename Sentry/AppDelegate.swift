@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import CoreAudio
 import Foundation
 import IOKit
 import IOKit.pwr_mgt
@@ -28,28 +29,40 @@ class AppDelegate: NSObject, ObservableObject, NSApplicationDelegate {
         _ = MouseLocation.shared
         preventSleep()
         preventDisplaySleep()
+
         if let isClamshellClosed = DeviceCheck.isMacLidClosed() {
             print("[*] device check reporting clamshell closed: \(isClamshellClosed)")
         } else {
             print("[*] failed to get clamshell state")
             presentError(title: "Sentry", message: "Unable to configure Sentry. Please try again later.")
         }
+
         if let isLocked = DeviceCheck.isMacLocked() {
             print("[*] device check reporting screen locked: \(isLocked)")
         } else {
             print("[*] failed to get screen lock state")
             presentError(title: "Sentry", message: "Unable to configure Sentry. Please try again later.")
         }
+
         let wifi = DeviceCheck.isConnectedToWirelessNetwork()
         print("[*] device check reporting wifi connected: \(wifi)")
+
         let power = DeviceCheck.isConnectedToPower()
         print("[*] device check reporting power connected: \(power)")
+
         if let battery = DeviceCheck.getBatteryLevel() {
             print("[*] device check reporting battery level: \(battery)")
         } else {
             print("[*] failed to get battery level")
             presentError(title: "Sentry", message: "Unable to configure Sentry. Please try again later.")
         }
+
+        if AlarmEngine.defaultSpeakerDevice() == kAudioDeviceUnknown {
+            print("[*] no default speaker device found")
+            presentError(title: "Sentry", message: "Unable to locate default speaker device. Please ensure your audio output is configured correctly.")
+        }
+
+        print("[*] current system volume: \(AlarmEngine.readSystemVolume()?.description ?? "???"))")
     }
 
     func applicationWillTerminate(_: Notification) {

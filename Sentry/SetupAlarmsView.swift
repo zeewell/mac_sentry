@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SetupAlarmsView: View {
     @StateObject var vm = SentryConfigurationManager.shared
-    
+
     var body: some View {
         FormView(title: "Setup Alarm Triggers", leftBottom: {
             Button("Learn More - Disable Auto Sleep") {

@@ -40,6 +40,7 @@ class Sentry: NSObject, ObservableObject {
     private var lastLidState: Bool?
     private var lastNetworkState: Bool?
     private var lastPowerState: Bool?
+    private var initialSpeakerVolume: Float = 0.0
 
     // MARK: - Alarm System
 
@@ -79,6 +80,7 @@ class Sentry: NSObject, ObservableObject {
         if configuration.sentryRecordingEnabled {
             startRecording()
         }
+        initialSpeakerVolume = AlarmEngine.readSystemVolume() ?? 0
         Thread {
             while self.status == .run {
                 sleep(1)
@@ -94,6 +96,7 @@ class Sentry: NSObject, ObservableObject {
         stopRecording()
         unlockAlarm()
         SentryConfigurationManager.shared.disconnectFromSleepHold()
+        AlarmEngine.setSystemVolume(initialSpeakerVolume)
         NSAnimationContext.runAnimationGroup { context in
             context.duration = 0.3
             windowController?.window?.contentView?.animator().alphaValue = 0
@@ -125,7 +128,7 @@ class Sentry: NSObject, ObservableObject {
 
     private func executeOnce() {
         guard !isCurrentlyAlarming else { return }
-        
+
         SentryConfigurationManager.shared.communicateWithSleepHoldServiceIfNeeded()
 
         if configuration.sentryTriggersLidEnabled {
@@ -215,11 +218,12 @@ class Sentry: NSObject, ObservableObject {
         }
 
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-            audioPlayer?.numberOfLoops = -1 // 无限循环
-            audioPlayer?.volume = 0.1 // 开始时 10% 音量
-            audioPlayer?.play()
-            NSSound.setSystemVolume(1)
+            let audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            self.audioPlayer = audioPlayer
+            audioPlayer.numberOfLoops = -1 // 无限循环
+            audioPlayer.volume = 0.1 // 开始时 10% 音量
+            audioPlayer.currentDevice = "BuiltInSpeakerDevice"
+            audioPlayer.play()
 
             startVolumeTimer()
         } catch {
@@ -235,6 +239,8 @@ class Sentry: NSObject, ObservableObject {
                 timer.invalidate()
                 return
             }
+            AlarmEngine.setSystemVolume(1)
+
             currentStep += 1
             if currentStep <= 3 { return }
 

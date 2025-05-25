@@ -5,6 +5,7 @@
 //  Created by 秋星桥 on 5/24/25.
 //
 
+import AppKit
 import Foundation
 
 #if !DEBUG

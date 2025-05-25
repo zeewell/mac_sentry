@@ -467,6 +467,16 @@
         }
       }
     },
+    "Unable to locate default speaker device. Please ensure your audio output is configured correctly." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法确认你的扬声器设备。请检查音频配置。"
+          }
+        }
+      }
+    },
     "Use Bark" : {
       "localizations" : {
         "zh-Hans" : {
