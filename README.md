@@ -1,5 +1,10 @@
 # Sentry
 
+<p align="center">
+  <a href="README.md">English</a> |
+  <a href="./Resources/i18n/zh-Hans/README.md">简体中文</a> |
+</p>
+
 A powerful macOS security monitoring application that detects unauthorized access attempts and records video evidence for you.
 
 Picture this: you're vibing and coding in a coffee shop when nature calls. You have to step away but don't want to lug your laptop to the restroom. Simply activate Sentry mode, and if anything suspicious happens, you can quickly wrap things up and rush back to the scene!
