@@ -280,7 +280,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sentry/Sentry.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 964G86XT2P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -289,7 +289,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Sentry;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Sentry Mode app needs this permission to record the space in front of your Mac. Your data will be stored locally.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Sentry app needs this permission to record the space in front of your Mac. Your data will be stored locally.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Lakr Aream. All rights reserved.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -313,7 +313,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sentry/Sentry.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 964G86XT2P;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -322,7 +322,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Sentry;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Sentry Mode app needs this permission to record the space in front of your Mac. Your data will be stored locally.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Sentry app needs this permission to record the space in front of your Mac. Your data will be stored locally.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Lakr Aream. All rights reserved.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

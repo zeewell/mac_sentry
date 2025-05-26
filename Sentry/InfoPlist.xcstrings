@@ -14,7 +14,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "哨兵"
+            "value" : "Sentry"
           }
         }
       }
@@ -32,7 +32,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "哨兵"
+            "value" : "Sentry"
           }
         }
       }
@@ -44,13 +44,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Sentry Mode app needs this permission to record the space in front of your Mac. Your data will be stored locally."
+            "value" : "Sentry app needs this permission to record the space in front of your Mac. Your data will be stored locally."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "哨兵模式需要这个权限才能录制电脑前的内容。录制内容将被保存到本地。"
+            "value" : "Sentry 需要这个权限才能录制电脑前的内容。录制内容将被保存到本地。"
           }
         }
       }
