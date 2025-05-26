@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="../../../README.md">English</a> |
-  <a href="README.md">简体中文</a> |
+  <a href="README.md">简体中文</a>
 </p>
 
 一款强大的 macOS 安全监控应用程序，可检测未经授权的访问尝试并为您录制视频证据。

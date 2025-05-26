@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="README.md">English</a> |
-  <a href="./Resources/i18n/zh-Hans/README.md">简体中文</a> |
+  <a href="./Resources/i18n/zh-Hans/README.md">简体中文</a>
 </p>
 
 A powerful macOS security monitoring application that detects unauthorized access attempts and records video evidence for you.
@@ -63,9 +63,11 @@ sudo pmset -a disablesleep 0
 ```
 
 ## License
+
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Disclaimer
+
 This software is intended for legitimate security monitoring of your own devices. Users are responsible for ensuring compliance with local laws and regulations regarding recording and monitoring.
 
 ---
