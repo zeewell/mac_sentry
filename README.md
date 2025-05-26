@@ -22,7 +22,10 @@ Picture this: you're vibing and coding in a coffee shop when nature calls. You h
 
 ## Installation
 
-1. Download the app from [![App Store Icon](./Resources/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg)](https://apps.apple.com/us/app/sentry-just-step-away/id6746349629)
+1. Download Sentry from the Mac App Store:
+
+[![App Store Icon](./Resources/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg)](https://apps.apple.com/us/app/sentry-just-step-away/id6746349629)
+
 2. Disable auto sleep mode [see below](#installation---disable-auto-sleep)
 3. When you need it, launch Sentry from your Applications folder.
 
